@@ -18,6 +18,6 @@ Những phần mềm hoặc công cụ cần thiết để cài đặt:
 - B4: Sau khi cài đặt MonggoDB thì cần import file connection có tên shop vào monggo và trong đó có file database shopquanao là đúng.
 - B5: Hoàn tất việc cài đặt môi trường, ta dùng lệnh ‘npm start’ để thực hiện chạy chương trình.
 - B6: Trên thanh terminal có hiển thị ‘localhost:3000/’ nhấn giữ ctrl sau đó click vào thì sẽ được chuyển đến trang chủ.
-=======s
+=======
 # Clothing-Websites
 >>>>>>> 938fc20318cb2314254443b967a7130d757f717f
