@@ -1,0 +1,141 @@
+<a href="/admin/products"><button type="button" class="btn btn-secondary m-3">x</button></a>
+<div class="bg-body-secondary container  p-3 rounded-5">
+    <h3 class="mb-4">Thêm sản phẩm</h3>
+    <form>
+        <div class="mb-3">
+            <label for="nameProduct" class="form-label">Tên sản phẩm</label>
+            <input type="text" class="form-control" id="nameProduct" name="nameProduct" required>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6">
+                <div class="mb-3">
+                    <label for="categoriesProduct" class="form-label">Phân loại sản phẩm</label>
+                    <select id="categoriesProduct" name="categoriesProduct" class="form-select" required>
+                        <option value="Áo thun">Áo thun</option>
+                        <option value="Áo polo">Áo Polo</option>
+                        <option value="Quần">Quần</option>
+                        <option value="Áo sweater">Sweater</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="mb-3">
+                    <label for="brandProduct" class="form-label">Thuộc thương hiệu</label>
+                    <select id="brandProduct" name="brandProduct" class="form-select" required>
+                        <option value="Levents">Levents</option>
+                        <option value="Paradox">Paradox</option>
+                        <option value="Lunacy">Lunacy</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6">
+                <div class="mb-3">
+                    <label for="priceProduct" class="form-label">Giá sản phẩm</label>
+                    <input type="number" class="form-control" id="priceProduct" name="priceProduct" required>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="mb-3">
+                    <label for="quantityProduct" class="form-label">Số lượng</label>
+                    <input type="number" class="form-control" id="quantityProduct" name="quantityProduct" required>
+                </div>
+            </div>
+        </div>
+
+        <div class="mb-3">
+            <label for="imgProduct" class="form-label">Chọn ảnh sản phẩm</label>
+            <input type="file" class="form-control" id="imgProduct" name="imgProduct" required>
+        </div>
+
+        <div class="row">
+            <div class="col-md-4">
+                <div class="mb-3">
+                    <label for="color" class="form-label">Màu sản phẩm</label>
+                    <input type="color" class="form-control form-control-color" id="colorAdd" name="color"
+                        value="#563d7c" required>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="mb-3">
+                    <label for="size" class="form-label">Size sản phẩm</label>
+                    <select class="form-select" aria-label="Default select example" id="sizeAdd">
+                        <option value="S">S</option>
+                        <option value="M">M</option>
+                        <option value="L">L</option>
+                        <option value="XL">XL</option>
+                        <option value="XXL">XXL</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <button type="button" id="btn-select" class="btn btn-primary">Chọn</button>
+
+        <div class="mb-3 mt-3">
+            <p>Màu đã chọn: <span id="show-color">Chưa chọn</span></p>
+        </div>
+        <div class="mb-3 mt-3">
+            <p>Size đã chọn: <span id="show-size">Chưa chọn</span></p>
+        </div>
+
+        <div class="mb-3">
+            <label for="detailProduct" class="form-label">Mô tả sản phẩm</label>
+            <textarea class="form-control" id="detailProduct" name="detailProduct" rows="3" required></textarea>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Thêm sản phẩm</button>
+    </form>
+</div>
+<script>
+    let arrColor = [], arrSize = [];
+    const btn_select = document.getElementById('btn-select');
+    const valueColor = document.getElementById('colorAdd');
+    const valueSize = document.getElementById('sizeAdd');
+    const show_color = document.getElementById('show-color');
+    const show_size = document.getElementById('show-size');
+    const addProductForm = document.querySelector('form');
+    btn_select.addEventListener('click', () => {
+        const color = valueColor.value.trim();
+        const size = valueSize.value.trim();
+        if (!arrColor.includes(color) && color !== '') {
+            arrColor.push(color);
+        }
+        if (!arrSize.includes(size) && size !== '') {
+            arrSize.push(size);
+        }
+
+        valueSize.value = '';
+        show_color.innerHTML = arrColor.join(', ');
+        show_size.innerHTML = arrSize.join(', ');
+    });
+    addProductForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+
+        const formData = new FormData(addProductForm);
+
+        formData.append('colorProduct', JSON.stringify(arrColor));
+        formData.append('sizeProduct', JSON.stringify(arrSize));
+
+        try {
+            const response = await fetch('/admin/products/addProduct/post', {
+                method: 'POST',
+                body: formData,
+            });
+
+            const result = await response.json();
+            if (result.success) {
+                alert('Sản phẩm đã được thêm thành công!');
+                window.location.href = '/admin/products';
+            } else {
+                alert(result.message);
+            }
+        } catch (error) {
+            console.error('Lỗi khi thêm sản phẩm:', error);
+            alert('Có lỗi xảy ra khi thêm sản phẩm.');
+        }
+    });
+</script>

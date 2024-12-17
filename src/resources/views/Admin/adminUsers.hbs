@@ -1,0 +1,33 @@
+<div class="container-tabel">
+    <div class="container">
+        <div class="cardHeader">
+            <h2>Quản lý người dùng</h2>
+        </div>
+
+        <table>
+            <thead>
+                <tr>
+                    <td>Tên</td>
+                    <td>Email</td>
+                    <td>Password</td>
+                    <td>Số điện thoại</td>
+                    <td>Vai trò</td>
+                    <td>Hành động</td>
+                </tr>
+            </thead>
+
+            <tbody>
+                {{#each user}}
+                <tr>
+                    <td>{{this.nameUser}}</td>
+                    <td>{{this.emailUser}}</td>
+                    <td>{{this.passwordUser}}</td>
+                    <td>{{this.phoneUser}}</td>
+                    <td>{{this.role}}</td>
+                    <td><ion-icon name="trash-outline" class="delete-user" data-id="{{this._id}}"></ion-icon></td>
+                </tr>
+                {{/each}}
+            </tbody>
+        </table>
+    </div>
+</div>

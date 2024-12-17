@@ -1,0 +1,35 @@
+<div class="container-tabel">
+    <div class="container">
+        <div class="cardHeader">
+            <h2>Quản lý mã giảm giá</h2>
+            <a href="/admin/voucher/addvoucher" class="btn">Thêm mã</a>
+        </div>
+
+        <table>
+            <thead>
+                <tr>
+                    <td>Mã</td>
+                    <td>Điều kiện</td>
+                    <td>Giá trị của mã</td>
+                    <td>Hành động</td>
+                </tr>
+            </thead>
+
+            <tbody>
+                {{#each voucher}}
+                <tr>
+                    <td>{{this.codeVoucher}}</td>
+                    <td>{{this.conditionVoucher}}.000VND</td>
+                    <td>{{this.valueVoucher}}.000VND</td>
+                    <td>
+                        <ion-icon name="trash-outline" class="delete-product" data-id="{{this._id}}"></ion-icon>
+                        <a href="/admin/products/editProduct/{{this._id}}"><ion-icon
+                                name="build-outline"></ion-icon></a>
+
+                    </td>
+                </tr>
+                {{/each}}
+            </tbody>
+        </table>
+    </div>
+</div>

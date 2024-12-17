@@ -1,0 +1,95 @@
+<link rel="stylesheet" href="/css/payment.css">
+<nav>
+    <div>
+        <a href="/cart"><ion-icon id="back" name="arrow-back-outline"></ion-icon></a>
+    </div>
+</nav>
+<main>
+    <div class="container">
+        <div class="content-information-user">
+            <h2>THANH TOÁN</h2>
+            <h4>Thông tin giao hàng</h4>
+            <div class="user">
+                <div class="icon-user">
+                    <ion-icon name="person-outline"></ion-icon>
+                </div>
+                <div class="Email-logout">
+                    <p id="Email-user">{{users.emailUser}}</p>
+                    <a href="/auth/logout" id="btn-logout">Đăng xuất</a>
+                </div>
+            </div>
+            <p>Địa chỉ:</p>
+            {{#if address.length}}
+            <select id="address-select">
+                {{#each address}}
+                <option value="{{this.address}}">{{this.address}}</option>
+                {{/each}}
+            </select>
+            {{else}}
+            <a href="/user" title="Click để thêm địa chỉ" style="color: red; cursor: pointer;" id="add-address">Bạn chưa
+                có địa
+                chỉ</a>
+            {{/if}}
+
+            <div class="input-phone">
+                <input type="text" id="phone" value="{{users.phoneUser}}" placeholder="Số điện thoại">
+            </div>
+            <h4 class="h4">Phương thức thanh toán</h4>
+            <div class="product-payment">
+                <input type="radio" id="procedure-payment">
+                <label id="radio-checked" for="procedure-payment"></label>
+                <ion-icon name="card-outline"></ion-icon>
+                <span>Thanh toán khi nhận hàng</span>
+            </div>
+            <div class="btn-payment">
+                <button id="btn-payment">Thanh toán</button>
+            </div>
+        </div>
+        <div class="content-information-order">
+            <div class="product-order" id="show-product-order">
+
+                {{#each carts}}
+                <div class="product">
+                    <div class="img-product">
+                        <img src="{{this.idProduct.imageProduct}}" alt="">
+                        <label>{{this.quantityCart}}</label>
+                    </div>
+                    <div class="infor-product">
+                        <b>{{this.idProduct.nameProduct}}</b>
+                        <p>{{this.colorCart}}/{{this.sizeCart}} </p>
+                    </div>
+                    <div class="total-product">
+                        <p>{{this.totalCart}}.000VND</p>
+                    </div>
+                </div>
+                {{/each}}
+
+            </div>
+            <hr>
+            <div class="voucher-apply">
+                <input type="text" id="code-voucher" placeholder="Nhập mã giảm giá của bạn">
+                <button id="btn-apply-voucher">Áp dụng</button>
+            </div>
+            <hr>
+            <div class="Provisional">
+                <div>
+                    <p>Tạm tính</p>
+                    <b>{{totalProduct}}.000VND</b>
+                </div>
+                <div>
+                    <p>Phí vận chuyển</p>
+                    <b>50.000VND</b>
+                </div>
+            </div>
+            <hr>
+            <div class="Total-order">
+                <p>Tổng cộng</p>
+                <div class="show-total">
+                    <b><span id="total-price">{{total}}</span>.000VND</b>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+<script type="module" src="/js/payment.js"></script>

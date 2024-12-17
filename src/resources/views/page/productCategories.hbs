@@ -1,0 +1,15 @@
+<link rel="stylesheet" href="/css/product.css">
+<main>
+    <div class="title_view_all_product">
+        <span>
+            <a href="/">Trang chủ/</a>
+            <a href="/product">Tất cả sản phẩm/</a>
+            <p id="title-set">{{cate}}</p>
+        </span>
+    </div>
+    <div class="content_view_all_product" id="show-cart">
+        {{#each products}}
+        {{> card slug=slug id=_id image=imageProduct name=nameProduct colorProduct=colorProduct price=priceProduct}}
+        {{/each}}
+    </div>
+</main>

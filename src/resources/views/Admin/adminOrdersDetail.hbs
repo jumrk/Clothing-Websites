@@ -1,0 +1,91 @@
+<link rel="stylesheet" href="/css/orderDetail.css">
+<main>
+    <div class="container">
+        <a style="color: black;" href="/admin/orders">
+            <ion-icon id="back" name="arrow-back-circle-outline"></ion-icon>
+        </a>
+        <div class="content-product" id="show-card">
+
+            {{#each orderDetails}}
+            <div class="card">
+                <div class="img">
+                    <a href="/product/{{this.productId.slug}}">
+                        <img src="{{this.productId.imageProduct}}" alt="">
+                    </a>
+                </div>
+                <div class="name-size-color-product">
+                    <b>{{this.productId.nameProduct}}</b>
+                    <p>{{this.size}}/<span
+                            style="height: 15px;margin-left: 5px;width: 15px;display: inline-block; border: 1px solid black; border-radius: 5px; background-color: {{this.colorCart}} ;"></span>
+                    </p>
+                </div>
+                <div class="total-product">
+                    <b>x{{this.quantity}}</b>
+                    <p>{{this.total}}.000VND</p>
+                </div>
+            </div>
+            {{/each}}
+
+        </div>
+        <hr>
+        <div class="content-detailOrder">
+            <div class="order-status">
+                <h2>Tình trạng đơn hàng</h2>
+                <p id="show-order-status">{{order.status}}</p>
+            </div>
+            <div class="total-order">
+                <h2>Tổng giá trị đơn hàng</h2>
+                <p id="show-total-order">{{order.totalPrice}}.000VND</p>
+            </div>
+        </div>
+        <hr>
+        <div class="container-select">
+            <h2>Cập nhật tình trạng đơn</h2>
+            <select class="select" name="update-status">
+                <option value="Đang xác nhận">Đang xác nhận</option>
+                <option value="Xác nhận thành công">Xác nhận thành công</option>
+                <option value="Vận chuyển">Vận chuyển</option>
+                <option value="Thành công">Thành công</option>
+            </select>
+        </div>
+        <div class="btn-delete-order">
+            <button id="btn-update-status" data-order-id="{{order._id}}">Xác nhận</button>
+        </div>
+    </div>
+</main>
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const updateStatusButton = document.getElementById('btn-update-status');
+
+        if (updateStatusButton) {
+            updateStatusButton.addEventListener('click', () => {
+                const orderId = updateStatusButton.dataset.orderId;
+                const selectElement = document.querySelector('.select');
+                const newStatus = selectElement.value;
+                fetch(`/admin/orders/${orderId}/update-status`, {
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ status: newStatus }),
+                })
+                    .then((response) => {
+                        if (response.ok) {
+                            return response.json();
+                        } else {
+                            throw new Error('Cập nhật thất bại');
+                        }
+                    })
+                    .then((data) => {
+                        alert('Cập nhật tình trạng đơn hàng thành công!');
+                        document.getElementById('show-order-status').textContent = newStatus;
+                    })
+                    .catch((error) => {
+                        console.error(error);
+                        alert('Đã xảy ra lỗi khi cập nhật tình trạng đơn hàng.');
+                    });
+            });
+        }
+    });
+
+</script>

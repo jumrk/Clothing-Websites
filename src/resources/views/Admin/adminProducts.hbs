@@ -1,0 +1,56 @@
+<div class="container-tabel">
+    <div class="container">
+        <div class="cardHeader">
+            <h2>Quản lý sản phẩm</h2>
+            <a href="/admin/products/addProduct" class="btn">Thêm sản phẩm mới</a>
+        </div>
+
+        <table>
+            <thead>
+                <tr>
+                    <td>Tên</td>
+                    <td>Ảnh</td>
+                    <td>Mô tả</td>
+                    <td>Đơn giá</td>
+                    <td>Số lượng</td>
+                    <td>Màu</td>
+                    <td>Size</td>
+                    <td>Thương hiệu</td>
+                    <td>Phân loại</td>
+                    <td>Hành động</td>
+                </tr>
+            </thead>
+
+            <tbody>
+                {{#each products}}
+                <tr>
+                    <td>{{this.nameProduct}}</td>
+                    <td class="img"><img src="{{this.imageProduct}}" alt=""></td>
+                    <td>{{this.descriptionProduct}}</td>
+                    <td>{{this.priceProduct}}.000VND</td>
+                    <td>{{this.quantityProduct}}</td>
+                    <td>
+                        {{#each this.colorProduct}}
+                        <span
+                            style="border: 1px solid black; height: 20px;margin-right: 5px;width: 20px;display: inline-block; border-radius: 5px; background-color: {{this}} ;"></span>
+                        {{/each}}
+                    </td>
+                    <td>
+                        {{#each sizeProduct}}
+                        {{this}},
+                        {{/each}}
+                    </td>
+                    <td>{{this.brandName}}</td>
+                    <td>{{this.categories}}</td>
+                    <td>
+                        <ion-icon name="trash-outline" class="delete-product" data-id="{{this._id}}"></ion-icon>
+                        <a href="/admin/products/editProduct/{{this._id}}"><ion-icon
+                                name="build-outline"></ion-icon></a>
+
+                    </td>
+                </tr>
+                {{/each}}
+            </tbody>
+        </table>
+    </div>
+</div>

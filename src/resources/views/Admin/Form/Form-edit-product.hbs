@@ -1,0 +1,116 @@
+<a href="/admin/products"><button type="button" class="btn btn-secondary m-3">x</button></a>
+<div class="bg-body-secondary container p-3 rounded-5">
+    <h3 class="mb-4">Sửa sản phẩm - {{products.nameProduct}}</h3>
+    <form id="editProductForm" data-product-id="{{products._id}}" enctype="multipart/form-data">
+        <div class="mb-3">
+            <label for="nameProduct" class="form-label">Tên sản phẩm</label>
+            <input type="text" class="form-control" id="nameProduct" name="nameProduct" value="{{products.nameProduct}}"
+                required>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6">
+                <div class="mb-3">
+                    <label for="categoriesProduct" class="form-label">Phân loại sản phẩm</label>
+                    <select id="categoriesProduct" name="categoriesProduct" class="form-select" required>
+                        <option value="Áo thun">Áo thun</option>
+                        <option value="Áo polo">Áo Polo</option>
+                        <option value="Quần">Quần</option>
+                        <option value="Áo sweater">Sweater</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="mb-3">
+                    <label for="brandProduct" class="form-label">Thuộc thương hiệu</label>
+                    <select id="brandProduct" name="brandProduct" class="form-select" required>
+                        <option value="Levents">Levents</option>
+                        <option value="Paradox">Paradox</option>
+                        <option value="Lunacy">Lunacy</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6">
+                <div class="mb-3">
+                    <label for="priceProduct" class="form-label">Giá sản phẩm</label>
+                    <input type="number" class="form-control" id="priceProduct" value="{{products.priceProduct}}"
+                        name="priceProduct" required>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="mb-3">
+                    <label for="quantityProduct" class="form-label">Số lượng</label>
+                    <input type="number" class="form-control" id="quantityProduct" name="quantityProduct"
+                        value="{{products.quantityProduct}}" required>
+                </div>
+            </div>
+        </div>
+
+        <div class="mb-3">
+            <label for="imgProduct" class="form-label">Chọn ảnh sản phẩm</label>
+            <input type="file" class="form-control" id="imgProduct" name="imgProduct">
+            <input type="hidden" id="currentImage" name="currentImage" value="{{products.imageProduct}}">
+        </div>
+
+        <div class="row">
+            <div class="col-md-4">
+                <div class="mb-3">
+                    <label for="color" class="form-label">Màu sản phẩm</label>
+                    <input type="text" class="form-control" value="{{products.colorProduct}}" name="color" required>
+
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="mb-3">
+                    <label for="size" class="form-label">Size sản phẩm</label>
+                    <input type="text" class="form-control" id="size" name="size" value="{{products.sizeProduct}}"
+                        required>
+                </div>
+            </div>
+        </div>
+        <div class="mb-3">
+            <label for="detailProduct" class="form-label">Mô tả sản phẩm</label>
+            <textarea class="form-control" id="detailProduct" name="detailProduct" rows="3"
+                required>{{products.descriptionProduct}}</textarea>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Xác nhận</button>
+    </form>
+</div>
+<script>
+    document.getElementById('editProductForm').addEventListener('submit', async (e) => {
+        e.preventDefault();
+
+        const form = e.target;
+        const formData = new FormData(form);
+
+        const currentImage = document.getElementById('currentImage').value;
+
+        if (!formData.get('imgProduct').name) {
+            formData.delete('imgProduct');
+            formData.append('imgProduct', currentImage);
+        }
+
+        try {
+            const productId = form.dataset.productId;
+            const response = await fetch(`/admin/products/editProduct/${productId}`, {
+                method: 'PUT',
+                body: formData,
+            });
+
+            const result = await response.json();
+            if (result.success) {
+                alert('Sản phẩm đã được cập nhật thành công!');
+                window.location.href = '/admin/products';
+            } else {
+                alert(result.message || 'Có lỗi xảy ra!');
+            }
+        } catch (error) {
+            console.error('Lỗi khi cập nhật sản phẩm:', error);
+            alert('Đã xảy ra lỗi khi cập nhật sản phẩm.');
+        }
+    });
+</script>

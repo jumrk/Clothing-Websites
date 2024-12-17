@@ -1,0 +1,159 @@
+<link rel="stylesheet" href="/css/user.css">
+<main>
+    <div class="form-edit-user" id="form-edit-address">
+        <div class="content-form-user">
+            <form id="update-address-form">
+                <ion-icon id="close-form-edit-address" name="close-outline"></ion-icon>
+                <p>Địa chỉ</p>
+                <div class="ground-input-user">
+                    <label for="address-edit">Địa chỉ</label>
+                    <input type="text" id="addressEdit" placeholder="Thôn/ấp, phường/xã, huyện/quận, tỉnh/thành phố">
+                </div>
+                <div class="ground-button">
+                    <button type="submit">Xác nhận</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="form-edit-user" id="form-address">
+        <div class="content-form-user">
+            <form action="/user/createAddreee" method="post">
+                <ion-icon id="close-form-address" name="close-outline"></ion-icon>
+                <p>Địa chỉ</p>
+                <div class="ground-input-user">
+                    <label for="address">Địa chỉ</label>
+                    <input type="hidden" name="userID" value="{{user._id}}">
+                    <input type="text" name="address" id="address"
+                        placeholder="Thôn/ấp, phường/xã, huyện/quận, tỉnh/thành phố" required>
+                </div>
+                <div class="ground-button">
+                    <button id="btn-add-address">Xác nhận</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="form-edit-user" id="form-edit-user">
+        <div class="content-form-user">
+            <form method="POST" action="/user/{{user._id}}?_method=PUT">
+                <ion-icon id="close-form" name="close-outline"></ion-icon>
+                <p>Chỉnh sửa thông tin</p>
+                <div class="ground-input-user">
+                    <label for="userName">Tên tài khoản:</label>
+                    <input type="text" name="nameUser" id="userName" value="{{user.nameUser}}">
+                </div>
+                <div class="ground-input-user">
+                    <label for="userEmail">Email:</label>
+                    <input type="email" name="emailUser" id="userEmail" value="{{user.emailUser}}">
+                </div>
+                <div class="ground-input-user">
+                    <label for="userPhone">Số điện thoại:</label>
+                    <input type="text" name="phoneUser" id="phoneUser" value="{{user.phoneUser}}">
+                </div>
+                <div class="ground-button">
+                    <button id="btn-edit-user">Xác nhận</button>
+                </div>
+            </form>
+
+        </div>
+    </div>
+    <div class="title-user">
+        <a href="/">Trang chủ</a>
+        <p>/Tài khoản</p>
+    </div>
+    <div class="user">
+        <div class="nav-user">
+            <h3>TRANG TÀI KHOẢN</h3>
+            <span><b>Xin chào,</b>
+                <p id="nav-show-name">{{user.nameUser}}</p>!
+            </span>
+            <div class="nav">
+                <p id="information-user">Thông tin tài khoản</p>
+                <p id="address-user">Địa chỉ</p>
+                <a id="Logout" href="/auth/logout">Đăng xuất</a>
+            </div>
+        </div>
+        <div class="content-user">
+            <div class="information-user" id="view-information">
+                <div class="title-information-user">
+                    <h3>TÀI KHOẢN</h3>
+                </div>
+                <div class="content-information-user">
+                    <p>Tên tài khoản: <b id="content-name-show">{{user.nameUser}}</b>!</p>
+                    <div class="information-user-address">
+                        <ion-icon name="mail-outline"></ion-icon>
+                        <p>Email: <span id="content-email-show">{{user.emailUser}}</span></p>
+                    </div>
+                    <div class="information-user-phone">
+                        <ion-icon name="call-outline"></ion-icon>
+                        <p>Điện thoại: <span id="content-phone-show">{{user.phoneUser}}</span></p>
+                    </div>
+                    <div class="btn-edit-user">
+                        <button id="btn-show-form">Chỉnh sửa</button>
+                    </div>
+                    <div class="information-user-order">
+                        <div class="title-user-order">
+                            <h3>ĐƠN HÀNG CỦA BẠN</h3>
+                            <a href="/user/orderHistory"><button>Lịch sử đơn hàng</button></a>
+                        </div>
+                        <div class="content-user-order">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Mã đơn hàng</th>
+                                        <th>Ngày đặt</th>
+                                        <th>Thành tiền</th>
+                                        <th>Tình trạng thanh toán</th>
+                                        <th>Tình trạng đơn hàng</th>
+                                    </tr>
+                                </thead>
+
+                                <tbody id="content-order-show">
+                                    {{#if orders.length}}
+                                    {{#each orders}}
+                                    <tr>
+                                        <td><a href="/orderDetail/{{this._id}}">{{this._id}}</a></td>
+                                        <td>{{this.orderDate}}</td>
+                                        <td>{{this.totalPrice}}.000 VND</td>
+                                        <td>{{this.paymentMethod}}</td>
+                                        <td>{{this.status}}</td>
+                                    </tr>
+                                    {{/each}}
+                                    {{else}}
+                                    <p>Bạn chưa có đơn hàng nào.</p>
+                                    {{/if}}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="information-address" id="view-address">
+                <div class="title-information-address">
+                    <h3>ĐỊA CHỈ CỦA BẠN</h3>
+                    <button id="add-address">Thêm địa chỉ</button>
+                </div>
+                <div class="content-information-address" id="show-address">
+
+                    {{#each address}}
+                    <hr>
+                    <div class="container-address">
+                        <div class="container-view">
+                            <p>Họ & tên: <span>{{this.nameUser}}</span></p>
+                            <p>Địa chỉ: <span id="addressDisplay">{{this.address}}</span></p>
+                        </div>
+                        <div class="container-action">
+                            <b class="elm-btn-edit" data-id="{{this._id}}" data-name="{{this.nameUser}}"
+                                data-address="{{this.address}}">Chỉnh sửa</b>
+
+                            <a href="/user/deleteAddress/{{this._id}}" class="elm-btn-delete">Xóa</a>
+                        </div>
+                    </div>
+                    {{/each}}
+
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+<script type="module" src="/js/user.js"></script>

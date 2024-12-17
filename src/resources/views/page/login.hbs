@@ -1,0 +1,29 @@
+<div class="container" id="container">
+    <div class="form-container sign-in">
+        <form method="POST" action="/auth/getStore">
+            {{> alert}}
+            <h1>Đăng nhập</h1>
+            <div class="social-icons">
+                <a href="/">
+                    <i class="fa-solid fa-house"></i>
+                </a>
+            </div>
+            <span>Vui nhập đăng nhập bằng email</span>
+            <input type="email" placeholder="Email" name="emailUser" id="email_Login" required>
+            <input type="password" placeholder="Mật khẩu" name="passwordUser" id="password_Login" required>
+            <a href="/forgot-password">Quên mật khẩu</a>
+            <button id="Login">Đăng nhập</button>
+        </form>
+    </div>
+    <div>
+        <div class="toggle-container">
+            <div class="toggle">
+                <div class="toggle-panel toggle-right">
+                    <h1>Chào bạn!</h1>
+                    <p>Đăng ký với thông tin cá nhân của bạn để sử dụng tất cả các tính năng của trang web</p>
+                    <a href="/auth/register"><button class="hidden" id="register">Đăng ký</button></a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

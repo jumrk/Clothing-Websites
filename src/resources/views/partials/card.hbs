@@ -1,0 +1,13 @@
+<link rel="stylesheet" href="/css/card.css">
+<div class="card" id="{{id}}">
+    <a href="/product/{{slug}}"><img src="{{image}}" alt=""></a>
+    <a href="/product/{{slug}}">
+        <p>{{name}}</p>
+    </a>
+    <div class="Color" id='Color-span'>
+        {{#each colorProduct}}
+        <span style="background-color: {{this}}"></span>
+        {{/each}}
+    </div>
+    <b>{{price}}</b>
+</div>

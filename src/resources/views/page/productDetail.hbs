@@ -1,0 +1,84 @@
+<link rel="stylesheet" href="/css/productDetail.css">
+<div class="content">
+    <div class="content-title">
+        <a href="/">Trang chủ</a>
+        <a href="/product">/Sản phẩm</a>
+        <p>/Chi tiết sản phẩm</p>
+        {{> alert}}
+    </div>
+    <div class="content-product-info">
+        <div class="product-img">
+            <img id="view_img" src="{{product.imageProduct}}" alt="">
+        </div>
+        <div class="product-info">
+            <form action="/cart/addCart/{{product._id}}" method="POST">
+                <h2 id="view_name">{{product.nameProduct}}</h2>
+                <b><b id="view_price">{{product.priceProduct}}</b><span>VND</span></b>
+                <input type="hidden" name="priceProduct" value="{{product.priceProduct}}">
+                <b>Brand: <span id="Show-brand">{{product.brandName}}</span></b>
+                <b>Kích thước: <span id="result-size"></span></b>
+                <div class="select-size" id="show-size">
+                    {{#each product.sizeProduct}}
+                    <input type="radio" name="sizeCart" id="{{this}}" value="{{this}}">
+                    <label for="{{this}}">{{this}}</label>
+                    {{/each}}
+                </div>
+                <b>Màu: <span id="result-color"></span></b>
+                <div class="select-color" id="show-color">
+                    {{#each product.colorProduct}}
+                    <input title="color" type="radio" name="colorCart" id="{{this}}" value="{{this}}">
+                    <label for="{{this}}" style="background-color: {{this}}"></label>
+                    {{/each}}
+                </div>
+                <div class="select-quantity-button-cart">
+                    <div class="select-quantity">
+                        <button type="button" id="minus">-</button>
+                        <input type="number" title="number" name="quantityCart" id="value-number" value="1">
+                        <button type="button" id="plus">+</button>
+                    </div>
+                </div>
+                <div class="button-pay">
+                    <button type="submit" id="Add_cart">Thêm vào giỏ hàng</button>
+                </div>
+            </form>
+            <div class="container-box-suggest">
+                <div class="box-suggest">
+                    <ion-icon name="car-outline"></ion-icon>
+                    <p>Giao hàng <br> nhanh 1-5 ngày <br> toàn quốc</p>
+                </div>
+                <div class="box-suggest">
+                    <ion-icon name="cash-outline"></ion-icon>
+                    <p>Tổng hợp <br> nhiều voucher <br>hấp dẫn</p>
+                </div>
+                <div class="box-suggest">
+                    <ion-icon name="bag-check-outline"></ion-icon>
+                    <p>Đảm bảo <br>chất lượng sản<br>phẩm</p>
+                </div>
+                <div class="box-suggest">
+                    <ion-icon name="repeat-outline"></ion-icon>
+                    <p>Đổi hàng/Hoàn<br>tiền bất kể lí do <br>trong vòng 15 ngày</p>
+                </div>
+            </div>
+            <div class="quantity-product-show">
+                <p>Số lượng sản phẩm: <span id="show-quantity">{{product.quantityProduct}}</span></p>
+            </div>
+            <div class="container-descript-product">
+                <div class="title-descript">
+                    <p id="click-descript">Mô tả sản phẩm </p>
+                </div>
+                <div class="content-descript" id="show-descript">
+                    {{product.descriptionProduct}}
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="product-suggest">
+        <div class="title-product-suggest">
+            <h2>Có thể bạn sẽ thích</h2>
+        </div>
+        <div class="card-product-suggest" id="show-product-new">
+
+        </div>
+    </div>
+</div>
+<script type="module" src="/js/product.js"></script>

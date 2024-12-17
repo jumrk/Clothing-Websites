@@ -1,0 +1,93 @@
+<div class="cardBox">
+    <div class="card">
+        <div>
+            <div class="numbers">{{userLength}}</div>
+            <div class="cardName">Tài khoản</div>
+        </div>
+
+        <div class="iconBx">
+            <ion-icon name="eye-outline"></ion-icon>
+        </div>
+    </div>
+
+    <div class="card">
+        <div>
+            <div class="numbers">{{orderLength}}</div>
+            <div class="cardName">Đơn hàng</div>
+        </div>
+
+        <div class="iconBx">
+            <ion-icon name="cart-outline"></ion-icon>
+        </div>
+    </div>
+
+    <div class="card">
+        <div>
+            <div class="numbers">{{productLength}}</div>
+            <div class="cardName">Sản phẩm</div>
+        </div>
+
+        <div class="iconBx">
+            <ion-icon name="shirt-outline"></ion-icon>
+        </div>
+    </div>
+
+    <div class="card">
+        <div>
+            <div class="numbers">{{formattedTotal}}.000VND</div>
+            <div class="cardName">Tổng doanh thu</div>
+        </div>
+
+        <div class="iconBx">
+            <ion-icon name="cash-outline"></ion-icon>
+        </div>
+    </div>
+</div>
+<div class="details">
+    <div class="recentOrders">
+        <div class="cardHeader">
+            <h2>Đơn hàng gần đây</h2>
+            <a href="/admin/orders" class="btn">Xem tất cả</a>
+        </div>
+        <table>
+            <thead>
+                <tr>
+                    <td>Mã đơn</td>
+                    <td>Giá tiền</td>
+                    <td>Thanh toán</td>
+                    <td>Tình trạng</td>
+                </tr>
+            </thead>
+            <tbody>
+                {{#each latestOrdersObjects}}
+                <tr>
+                    <td>{{this._id}}</td>
+                    <td>{{this.totalPrice}}</td>
+                    <td>{{this.paymentMethod}}</td>
+                    <td>{{this.status}}</td>
+                </tr>
+                {{/each}}
+            </tbody>
+        </table>
+    </div>
+
+    <div class="recentCustomers">
+        <div class="cardHeader">
+            <h2>Khách hàng gần đây</h2>
+        </div>
+
+        <table>
+            {{#each latestUsersObjects}}
+            <tr>
+                <td width="60px">
+                    <ion-icon name="person-outline"></ion-icon>
+                </td>
+                <td>
+                    <h4>{{this.nameUser}} <br> <span>{{this.emailUser}}</span></h4>
+                </td>
+            </tr>
+            {{/each}}
+
+        </table>
+    </div>
+</div>

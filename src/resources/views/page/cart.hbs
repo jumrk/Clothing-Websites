@@ -1,0 +1,73 @@
+<link rel="stylesheet" href="/css/cart.css">
+<main>
+    <div class="title-cart">
+        <a href="/">Trang chủ</a>
+        <p>/Giỏ hàng</p>
+    </div>
+    <div class="cart">
+        <div class="title">
+            <h2>Giỏ hàng</h2>
+        </div>
+        <div class="content-cart">
+            <div class="information-product-cart" id="show-cart">
+
+                {{#each carts}}
+                <div class="information-product">
+                    <div class="product">
+                        <div class="img-product">
+                            <ion-icon class="delete_list" name="close-outline" data-cart-id="{{this._id}}"></ion-icon>
+                            <img src="{{this.idProduct.imageProduct}}" alt="">
+                        </div>
+                        <div class="name-product">
+                            <p>{{this.idProduct.nameProduct}}</p>
+                            <div class="product-color-size">
+                                <p>{{this.sizeCart}}</p>
+                                <p>/</p>
+                                <p><span
+                                        style="height: 15px; margin-left: border: 1px solid black; 5px;width: 15px; display: inline-block; border-radius: 5px; background-color: {{this.colorCart}};"></span>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="price-quantity">
+                        <p class="total-price">{{this.totalCart}}.000VND</p>
+                        <div class="quantity">
+                            <button class="Minus" data-cart-id="{{this._id}}">-</button>
+                            <span>{{this.quantityCart}}</span>
+                            <button class="Plus" data-cart-id="{{this._id}}">+</button>
+                        </div>
+                    </div>
+                </div>
+                {{/each}}
+
+
+
+            </div>
+            <div class="total-product-cart">
+                <div class="total-cart">
+                    <p>TỔNG CỘNG</p>
+                    <b id="total">{{totalAmount}}.000VND</b>
+                </div>
+                <a href="/payment">
+                    <button id="payment">Thanh Toán</button>
+                </a>
+                <div class="voucher" id="show-voucher">
+
+                    {{#each vouchers}}
+                    <div class="container-voucher">
+                        <div class="content-container-voucher">
+                            <h2>{{this.codeVoucher}}</h2>
+                            <p>Nhập mã {{this.codeVoucher}} để giảm {{this.valueVoucher}}k cho đơn từ
+                                {{this.conditionVoucher}}k</p>
+                            <button id="copy-{{this.id}}" class="Copy" data-value="{{this.codeVoucher}}">Sao
+                                chép</button>
+                        </div>
+                    </div>
+                    {{/each}}
+
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+<script type="module" src="/js/cart.js"></script>

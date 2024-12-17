@@ -1,0 +1,37 @@
+<div class="container-tabel">
+    <div class="container">
+        <div class="cardHeader">
+            <h2>Quản lý đơn hàng</h2>
+        </div>
+
+        <table>
+            <thead>
+                <tr>
+                    <td>Mã đơn hàng</td>
+                    <td>Tên người mua</td>
+                    <td>Địa chỉ</td>
+                    <td>Số điện thoại</td>
+                    <td>Phương thức thanh toán</td>
+                    <td>Tổng số tiền</td>
+                    <td>Ngày đặt</td>
+                    <td>Tình trạng đơn hàng</td>
+                </tr>
+            </thead>
+
+            <tbody>
+                {{#each orders}}
+                <tr class="od">
+                    <td><a href="/admin/orders/orderDetail/{{this._id}}">{{this._id}}</a></td>
+                    <td>{{this.userId.nameUser}}</td>
+                    <td>{{this.address}}</td>
+                    <td>{{this.phone}}</td>
+                    <td>{{this.paymentMethod}}</td>
+                    <td>{{this.totalPrice}}.000VND</td>
+                    <td>{{this.orderDate}}</td>
+                    <td class="{{this.status}}">{{this.status}}</td>
+                </tr>
+                {{/each}}
+            </tbody>
+        </table>
+    </div>
+</div>

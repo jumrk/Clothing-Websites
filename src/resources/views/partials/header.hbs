@@ -1,0 +1,62 @@
+<header>
+    <!-- start header -->
+    <div class="header">
+        <div class="header-event-active">
+            <div class="header-event">
+                <div class="header-event-menu">
+                    <div class="button-event-menu">
+                        <ion-icon id="open_menu" name="menu-outline"></ion-icon>
+                    </div>
+                    <div class="event-menu" id="event-menu">
+                        <!--  -->
+                    </div>
+                    <div class="items-event-menu" id="items-event-menu">
+                        <ul>
+                            <li class="items-menu-title">
+                                <ion-icon id="close_menu" name="close-outline"></ion-icon>
+                                <b>Danh mục</b>
+                            </li>
+                            <hr>
+                            <li>
+                                <a href="/" id="home">Trang chủ</a>
+                            </li>
+                            <li>
+                                <a href="/product" id="All_product">Tất cả sản phẩm</a>
+                            </li>
+                            <li>
+                                <a href="/product/categories/Áo thun" id="T-shirts">Áo thun</a>
+                            </li>
+                            <li>
+                                <a href="/product/categories/Áo polo" id="Polo-shirt">Áo polo</a>
+                            </li>
+                            <li>
+                                <a href="/product/categories/Áo sweater" id="sweater">Áo Sweater</a>
+                            </li>
+                            <li>
+                                <a href="/product/categories/Quần" id="trousers">Quần</a>
+                            </li>
+                            <li>
+                                <a href="/about-us" id="aboutUs">Về chúng tôi</a>
+                            </li>
+                            <p style="text-align: center;">XIN CHÀO©</p>
+                        </ul>
+                    </div>
+                </div>
+                <div class="header-event-logo">
+                    <a href="/"><img src="/images/Logo.png" alt=""></a>
+                </div>
+                <div class="header-event-user">
+                    <div>
+                        <a id="cart-event" href="/cart"><ion-icon name="cart-outline"></ion-icon></a>
+                    </div>
+                    <div>
+                        <a id="person-event" href="{{#if isLoggedIn}}/user{{else}}/auth/login{{/if}}">
+                            <ion-icon name="person-outline"></ion-icon>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+<script type="module" src="/js/header.js"></script>
